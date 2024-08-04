@@ -2,8 +2,8 @@ import { Board } from "../robot.types";
 import { createRobot } from "../createRobot";
 
 const mockBoard: Board = {
-  width: 6,
-  height: 5,
+  width: 14,
+  height: 7,
 };
 
 describe("Robot", () => {
@@ -38,9 +38,8 @@ describe("Robot", () => {
   });
 
   test("ignore movements after getting lost", () => {
-    robot.moveAroundBoard("FFFFF");
-    robot.moveAroundBoard("F");
-    expect(robot.currentLocation()).toBe("0 5 N LOST");
+    robot.moveAroundBoard("FFFFFFF");
+    expect(robot.currentLocation()).toBe("0 6 N LOST");
   });
 
   test("handle lost scents", () => {

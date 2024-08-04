@@ -34,6 +34,7 @@ export const createRobot = (
 
   const moveAroundBoard = (movements: string): string => {
     movements.split("").every((move) => {
+      if (isLost) return false; // Stop processing if lost
       let newX = currentX;
       let newY = currentY;
       switch (move.toUpperCase()) {
@@ -61,7 +62,7 @@ export const createRobot = (
           break;
       }
 
-      if (newX < 0 || newX > board.width || newY < 0 || newY > board.height) {
+      if (newX < 0 || newX >= board.width || newY < 0 || newY >= board.height) {
         if (lostScents[`${currentX},${currentY}`] === undefined) {
           isLost = true;
           return false;
