@@ -11,6 +11,7 @@ export const Board = () => {
   const [robot, setRobot] = useState(() =>
     createRobot({ width: boardWidth, height: boardHeight }, 0, 0, "N")
   );
+
   const [robotPosition, setRobotPosition] = useState(robot.currentLocation());
 
   const moveRobot = (movements: string) => {
@@ -19,10 +20,7 @@ export const Board = () => {
   };
 
   // Create cells for the board
-  const cells = Array.from(
-    { length: boardWidth * boardHeight },
-    (_, index) => index
-  );
+  const cells = Array.from({ length: boardWidth * boardHeight });
 
   return (
     <div className={styles.container} data-testid="cypress-container">
@@ -51,8 +49,8 @@ export const Board = () => {
       </div>
       <div className={styles.buttons}>
         <button onClick={() => moveRobot("F")}>Move Forward</button>
-        <button onClick={() => moveRobot("L")}>Rotate Left</button>
-        <button onClick={() => moveRobot("R")}>Rotate Right</button>
+        <button onClick={() => moveRobot("L")}>Turn Left</button>
+        <button onClick={() => moveRobot("R")}>Turn Right</button>
       </div>
       <div className={styles.currentPosition}>
         Current Position: {robotPosition}
