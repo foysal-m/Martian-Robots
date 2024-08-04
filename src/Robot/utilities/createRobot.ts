@@ -1,18 +1,8 @@
 import { degreesToOrientation, orientationToDegrees } from "./helper";
+import { Board, LostScents } from "./robot.types";
 // Constants
 const rotateLeft: number = -90;
 const rotateRight: number = 90;
-const moveX: number = 50; // Size of each square in pixels
-const moveY: number = -50; // Y axis is in the opposite direction
-
-interface LostScents {
-  [key: string]: boolean;
-}
-
-export interface Board {
-  width: number;
-  height: number;
-}
 
 // function to create robot
 export const createRobot = (
