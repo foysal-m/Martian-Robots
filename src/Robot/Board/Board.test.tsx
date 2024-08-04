@@ -39,7 +39,7 @@ describe("Board Component", () => {
 
     render(<Board />);
 
-    const rotateLeftButton = screen.getByText("Rotate Left");
+    const rotateLeftButton = screen.getByText("Turn Left");
 
     fireEvent.click(rotateLeftButton);
     expect(moveAroundBoardMock).toHaveBeenCalledWith("L");
@@ -57,7 +57,7 @@ describe("Board Component", () => {
 
     render(<Board />);
 
-    const rotateRightButton = screen.getByText("Rotate Right");
+    const rotateRightButton = screen.getByText("Turn Right");
 
     fireEvent.click(rotateRightButton);
     expect(moveAroundBoardMock).toHaveBeenCalledWith("R");
