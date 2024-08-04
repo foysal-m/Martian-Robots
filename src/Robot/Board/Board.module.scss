@@ -1,90 +1,84 @@
 :root {
-  --margin-generic: 10px;
-  --board-cell-size: 50px;
   --board-background-color: #e40200;
-  --cell-border-color: #ddd;
   --button-background-color: #000;
   --button-hover-background-color: #fff;
+  --cell-border-color: #ddd;
   --text-color: #333;
 }
 
+$marginGeneric: 10px;
+$borderRadiusGeneric: 8px;
+
 .container {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  text-align: center;
+  border-radius: $borderRadiusGeneric;
+  display: flex;
   flex-direction: column;
-  padding: var(--margin-generic);
-  border-radius: 8px;
   font-family: Montserrat, sans-serif;
+  justify-content: center;
+  padding: $marginGeneric;
+  text-align: center;
 }
 
 .board {
-  display: grid;
-  grid-template-columns: repeat(14, var(--board-cell-size));
-  grid-template-rows: repeat(7, var(--board-cell-size));
-  gap: 0;
   background-color: var(--board-background-color);
   border: 2px solid var(--cell-border-color);
-  border-radius: 8px;
+  border-radius: $borderRadiusGeneric;
+  display: grid;
+  gap: 0;
+  grid-template-columns: repeat(14, $marginGeneric * 5);
+  grid-template-rows: repeat(7, $marginGeneric * 5);
 }
 
 .boardCell {
-  width: var(--board-cell-size);
-  height: var(--board-cell-size);
-  border: 1px solid var(--cell-border-color);
   box-sizing: border-box;
+  border: 1px solid var(--cell-border-color);
+  height: $marginGeneric * 5;
   position: relative;
-}
-
-.robotCell {
-  background-image: url("../../../assets/3-robot.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor: pointer;
+  width: $marginGeneric * 5;
 }
 
 .buttons {
-  margin-top: var(--margin-generic);
   display: flex;
-  gap: var(--margin-generic);
+  gap: $marginGeneric;
   justify-content: center;
+  margin-top: $marginGeneric;
 }
 
 button {
   background-color: var(--button-background-color);
   border: none;
-  border-radius: 4px;
+  border-radius: $borderRadiusGeneric/2;
   color: var(--button-hover-background-color);
-  padding: 10px 20px;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  font-size: $borderRadiusGeneric * 2;
+  padding: $marginGeneric $marginGeneric * 2;
 }
 
 button:hover {
   background-color: var(--button-hover-background-color);
-  color: var(--text-color);
   border: 1px solid var(--cell-border-color);
-}
-
-.currentPosition {
-  margin-top: var(--margin-generic);
   color: var(--text-color);
-  font-size: 18px;
 }
 
 .currentPosition {
-  margin-top: var(--margin-generic);
-  padding: var(--margin-generic);
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
   background-color: #f9f9f9;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: $borderRadiusGeneric;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: var(--text-color);
   display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: $marginGeneric;
+  padding: $marginGeneric;
   text-align: center;
+}
+
+.robotCell {
+  background-image: url("../../../assets/3-robot.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
 }
