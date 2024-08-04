@@ -12,7 +12,6 @@ export const Board = () => {
     createRobot({ width: boardWidth, height: boardHeight }, 0, 0, "N")
   );
   const [robotPosition, setRobotPosition] = useState(robot.currentLocation());
-  console.log(robotPosition);
 
   const moveRobot = (movements: string) => {
     robot.moveAroundBoard(movements);
@@ -45,6 +44,7 @@ export const Board = () => {
               className={`${styles.boardCell} ${
                 robotCell ? styles.robotCell : ""
               }`}
+              data-testid={robotCell ? "robot-cell" : ""}
             ></div>
           );
         })}
