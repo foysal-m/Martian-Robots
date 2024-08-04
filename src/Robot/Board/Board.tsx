@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createRobot } from "../utilities/createRobot";
 import styles from "./Board.module.scss";
 
@@ -14,13 +14,23 @@ export const Board = () => {
 
   const [robotPosition, setRobotPosition] = useState(robot.currentLocation());
 
+  // Create cells for the board
+  const cells = Array.from({ length: boardWidth * boardHeight });
+
   const moveRobot = (movements: string) => {
     robot.moveAroundBoard(movements);
     setRobotPosition(robot.currentLocation());
   };
 
-  // Create cells for the board
-  const cells = Array.from({ length: boardWidth * boardHeight });
+  useEffect(() => {
+    // Play sound if robot position includes "LOST"
+    if (robotPosition.includes("LOST")) {
+      const audio = new Audio(require("../../scream.mp3"));
+      if (audio) {
+        audio.play();
+      }
+    }
+  }, [robotPosition]);
 
   return (
     <div className={styles.container} data-testid="cypress-container">
@@ -54,6 +64,8 @@ export const Board = () => {
       </div>
       <div className={styles.currentPosition}>
         Current Position: {robotPosition}
+        {/* Audio element for playing sound */}
+        <audio id="lost-sound" src="../../scream.mp3" />
       </div>
     </div>
   );

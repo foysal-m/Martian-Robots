@@ -11,6 +11,12 @@ jest.mock("../utilities/createRobot", () => ({
 }));
 
 describe("Board Component", () => {
+  beforeAll(() => {
+    // Mock the HTMLAudioElement play method
+    global.HTMLAudioElement.prototype.play = jest.fn();
+    global.HTMLAudioElement.prototype.pause = jest.fn();
+  });
+
   test("moves the robot forward", () => {
     const moveAroundBoardMock = jest.fn();
     (createRobot as jest.Mock).mockReturnValue({
