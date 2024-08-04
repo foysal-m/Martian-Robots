@@ -1,5 +1,5 @@
-import { Board } from "../utilities/robot.types";
-import { createRobot } from "../utilities/createRobot";
+import { Board } from "../robot.types";
+import { createRobot } from "../createRobot";
 
 const mockBoard: Board = {
   width: 6,
