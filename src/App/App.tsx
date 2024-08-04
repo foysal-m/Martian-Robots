@@ -1,4 +1,4 @@
-import Board from "./Robot/Board/Board";
+import Board from "../Robot/Board/Board";
 
 function App() {
   return (
