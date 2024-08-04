@@ -1,21 +1,42 @@
 ### How to Run
 
-//Clone the repo locally and then run
-npm install
-npm run build
-npm start
+- Clone the Repository
 
-//To run the unit tests
-npm test
+  git clone <repository-url>
+  cd <repository-directory>
 
-To see all units test results
+- Install Dependencies
+
+  npm install
+
+- Build the Project
+
+  npm run build
+
+- Start the Development Sever
+
+  npm start
+
+- Run Unit Tests
+
+  npm test
 
 ### Technologies:
 
-Typescript for strictly type checking
-React to make board and bootstrap the app easily
-Jest & React-testing-library for unit tests
-SCSS to style the board
+- TypeScript: Provides strict type checking to enhance code quality and maintainability.
+- React: Facilitates the creation of the board and streamlines app development with its component-based architecture.
+- Jest & React Testing Library: Used for unit testing to ensure component functionality and reliability.
+- SCSS: Utilized for styling the board, offering advanced features and a more maintainable CSS structure.
+
+### Next steps
+
+#### Implement End-to-End (E2E) Tests:
+
+- Set up E2E tests using Cypress to visually verify the robot's behavior in the browser, providing a more intuitive testing experience compared to manual testing or unit tests.
+
+#### Enhance the User Interface:
+
+- Improve the UI by incorporating design enhancements and adding a streaming audio feature. This will play a scream sound whenever the robot gets lost, making the user experience more engaging and immediate.
 
 ### Problem: Martian Robots
 
