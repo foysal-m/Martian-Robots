@@ -2,7 +2,7 @@
 
 - Clone the Repository
 
-  git clone <repository-url>
+  git clone <https://github.com/foysal-m/red-badger-martian-robots.git>
 
 - Install Dependencies
 
@@ -12,13 +12,19 @@
 
   npm run build
 
-- Start the Development Sever
+- Start the Development Server
 
   npm start
 
 - Run Unit Tests
 
   npm test
+
+### How to see test coverage:
+
+- Run npm test coverage
+- After running the command, a coverage directory will be generated in the root folder of the project
+- Inside the coverage directory, you’ll find an index.html file. Open this file in a web browser to view the detailed test coverage report.
 
 ### Technologies:
 
