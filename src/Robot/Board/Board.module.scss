@@ -63,6 +63,11 @@ button {
     border: 1px solid var(--cell-border-color);
     color: var(--text-color);
   }
+
+  &:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+  }
 }
 
 // Current Position Styles
@@ -87,4 +92,14 @@ button {
   background-repeat: no-repeat;
   background-size: cover;
   cursor: pointer;
+}
+
+.warningNotification {
+  background-color: #fdd;
+  color: #d44;
+  padding: $marginGeneric;
+  margin-top: $marginGeneric;
+  border-radius: $borderRadiusGeneric;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: $borderRadiusGeneric * 2;
 }

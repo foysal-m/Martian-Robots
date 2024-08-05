@@ -1,0 +1,8 @@
+{
+  "title": "Martian Robot",
+  "moveForward": "Move Forward",
+  "turnLeft": "Turn Left",
+  "turnRight": "Turn Right",
+  "currentPositionLabel": "Current Position: {{position}}",
+  "refreshMessage": "Please refresh the page to continue again"
+}
