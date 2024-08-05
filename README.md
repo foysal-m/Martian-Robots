@@ -3,7 +3,6 @@
 - Clone the Repository
 
   git clone <repository-url>
-  cd <repository-directory>
 
 - Install Dependencies
 
@@ -36,7 +35,11 @@
 
 #### Enhance the User Interface:
 
-- Improve the UI by incorporating design enhancements and adding a streaming audio feature. This will play a scream sound whenever the robot gets lost, making the user experience more engaging and immediate.
+- Implement design enhancements to improve the overall visual appeal.
+
+- Ensure that the "Current Position" indicator accurately tracks and follows the robot's location, positioning it just outside the board for better visibility.
+
+- Adapt the board layout to ensure responsiveness across various devices, providing a consistent user experience on both desktop and mobile platforms.
 
 ### Problem: Martian Robots
 

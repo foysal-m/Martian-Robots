@@ -64,8 +64,6 @@ export const Board = () => {
       </div>
       <div className={styles.currentPosition}>
         Current Position: {robotPosition}
-        {/* Audio element for playing sound */}
-        <audio id="lost-sound" src="../../scream.mp3" />
       </div>
     </div>
   );
