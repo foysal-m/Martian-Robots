@@ -2,37 +2,39 @@
 
 - Clone the Repository
 
-  git clone <https://github.com/foysal-m/red-badger-martian-robots.git>
+  `git clone <https://github.com/foysal-m/red-badger-martian-robots.git>`
 
-- Install Dependencies
+- Install Dependencies: `npm install`
 
-  npm install
+- Build the Project: `npm run build`
 
-- Build the Project
+- Start the Development Server: `npm start`
 
-  npm run build
+- Run Unit Tests: `npm test`
 
-- Start the Development Server
+### How to run on docker desktop:
 
-  npm start
-
-- Run Unit Tests
-
-  npm test
+- Install docker desktop locally and login
+- Create an image from the dockerfile: run `docker build -t <username>/martian-robot:latest .` This command will build a Docker image from the Dockerfile and tag it as latest
+- Use the following command to start a container from the built image: `docker run -p 3000:3000 <username>/martian-robot`
+- This command will start the container and map port 3000 on your local machine to port 3000 in the container
+- Once the container is running, open your web browser and go to http://localhost:3000 to view the application.
+  This approach allows you to run the app without needing to install npm or run it locally.
 
 ### How to see test coverage:
 
 - Run npm test coverage
 - After running the command, a coverage directory will be generated in the root folder of the project
-- Inside the coverage directory, you’ll find an index.html file. Open this file in a web browser to view the detailed test coverage report.
+- Inside the coverage directory, you’ll find an `index.html` file. Open this file in a web browser to view the detailed test coverage report.
 
-### Technologies:
+### Technologies used:
 
-- TypeScript: Provides strict type checking to enhance code quality and maintainability
-- React: Facilitates the creation of the board and streamlines app development with its component-based architecture
-- Jest & React Testing Library: Used for unit testing to ensure component functionality and reliability
-- SCSS: Utilized for styling the board, offering advanced features and a more maintainable CSS structure
-- i18next: For localizing content
+- `Docker`: Utilized for containerizing the application to ensure consistent and portable deployment across different environments. Docker simplifies the process of managing dependencies and configurations, enabling seamless deployment and scaling of the app
+- `TypeScript`: Provides strict type checking to enhance code quality and maintainability
+- `React`: Facilitates the creation of the board and streamlines app development with its component-based architecture
+- `Jest & React Testing Library`: Used for unit testing to ensure component functionality and reliability
+- `SCSS`: Utilized for styling the board, offering advanced features and a more maintainable CSS structure
+- `i18next`: For localizing content
 
 ### Next steps
 
