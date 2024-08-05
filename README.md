@@ -22,10 +22,11 @@
 
 ### Technologies:
 
-- TypeScript: Provides strict type checking to enhance code quality and maintainability.
-- React: Facilitates the creation of the board and streamlines app development with its component-based architecture.
-- Jest & React Testing Library: Used for unit testing to ensure component functionality and reliability.
-- SCSS: Utilized for styling the board, offering advanced features and a more maintainable CSS structure.
+- TypeScript: Provides strict type checking to enhance code quality and maintainability
+- React: Facilitates the creation of the board and streamlines app development with its component-based architecture
+- Jest & React Testing Library: Used for unit testing to ensure component functionality and reliability
+- SCSS: Utilized for styling the board, offering advanced features and a more maintainable CSS structure
+- i18next: For localizing content
 
 ### Next steps
 

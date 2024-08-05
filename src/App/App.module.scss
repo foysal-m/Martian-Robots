@@ -1,4 +1,5 @@
 .appContainer {
-  background-image: url("../../public/assets/martian.webp");
-  height: 100vh;
+  background-image: url("../../public/assets/mars.jpg");
+  min-height: 100vh;
+  background-size: cover;
 }
