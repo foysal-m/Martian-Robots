@@ -8,6 +8,8 @@
   --cell-border-color: #ddd;
   --text-color: #333;
   --button-hover-color: rgb(20, 19, 19);
+
+  --wavy-mask: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDQwIDMyMCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0wLDE2MEw0OCwxNjUuM0M5NiwxNzEsMTkyLDE4MSwyODgsMTgxLjNDMzg0LDE4MSw0ODAsMTcxLDU3NiwxNzAuN0M2NzIsMTcxLDc2OCwxODEsODY0LDE4Ni43Qzk2MCwxOTIsMTA1NiwxOTIsMTE1MiwxOTJDMTI0OCwxOTIsMTM0NCwxOTIsMTM5MiwxOTJMMTQ0MCwxOTJMMTQ0MCwwTDEzOTIsMEMxMzQ0LDAxMjQ4LDAsMTE1MiwxMjQ4LDAxMDU2LDAsOTYwLDA4NjQsMCw3NjgsMCw1NzYsMCw0ODAsMCwzODQsMCwyODgsMCwxOTIsNDgsMS45IiAvPjwvc3ZnPg==");
 }
 
 $margin-generic: 10px;
@@ -36,6 +38,8 @@ body {
   border-radius: $border-radius-generic;
   grid-template-columns: repeat(14, $margin-generic * 5);
   grid-template-rows: repeat(7, $margin-generic * 5);
+  mask-image: var(--wavy-mask);
+  mask-size: 0.11%;
 
   .boardCell {
     box-sizing: border-box;
@@ -63,7 +67,6 @@ body {
       transform: scale(0.8) rotate(10deg);
     }
   }
-
   .lostRobot {
     animation: breaking 3s forwards;
   }
@@ -117,9 +120,12 @@ body {
 }
 
 h1 {
+  background-image: url("../../../public/assets/title-bg-image.png");
   color: var(--button-hover-background-color);
   font-family: Bitter, sans-serif;
   font-weight: 800;
+  mask-image: var(--wavy-mask);
+  mask-size: 4%;
 }
 
 .warningNotification {
