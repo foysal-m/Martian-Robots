@@ -3,33 +3,37 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { Board } from "./Board";
 import { createRobot } from "../utilities/createRobot";
 
+// Mock react-i18next
 jest.mock("react-i18next", () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
-    return {
-      t: (str: string) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    };
-  },
+  useTranslation: () => ({
+    t: (str: string) => str,
+    i18n: {
+      changeLanguage: () => new Promise(() => {}),
+    },
+  }),
   initReactI18next: {
     type: "3rdParty",
     init: () => {},
   },
 }));
 
-// Mock the createRobot function
+// Mock createRobot function
 jest.mock("../utilities/createRobot", () => ({
-  createRobot: jest.fn(() => ({
-    currentLocation: jest.fn(() => "0 0 N"),
-    moveAroundBoard: jest.fn(),
-  })),
+  createRobot: jest.fn(),
 }));
+
+const setupRobotMock = (
+  location = "0 0 N",
+  moveAroundBoardMock = jest.fn()
+) => {
+  (createRobot as jest.Mock).mockReturnValue({
+    currentLocation: jest.fn(() => location),
+    moveAroundBoard: moveAroundBoardMock,
+  });
+};
 
 describe("Board Component", () => {
   beforeAll(() => {
-    // Mock the HTMLAudioElement play and pause methods
     global.HTMLAudioElement.prototype.play = jest.fn();
     global.HTMLAudioElement.prototype.pause = jest.fn();
   });
@@ -40,75 +44,46 @@ describe("Board Component", () => {
 
   test("moves the robot forward", () => {
     const moveAroundBoardMock = jest.fn();
-    (createRobot as jest.Mock).mockReturnValue({
-      currentLocation: jest.fn(() => "0 1 N"),
-      moveAroundBoard: moveAroundBoardMock,
-    });
+    setupRobotMock("0 1 N", moveAroundBoardMock);
 
     render(<Board />);
 
-    const moveForwardButton = screen.getByText("Move Forward");
-
-    fireEvent.click(moveForwardButton);
+    fireEvent.click(screen.getByText("Move Forward"));
     expect(moveAroundBoardMock).toHaveBeenCalledWith("F");
-
-    const updatedPosition = screen.getByText("Current Position: 0 1 N");
-    expect(updatedPosition).toBeInTheDocument();
+    expect(screen.getByText("Current Position: 0 1 N")).toBeInTheDocument();
   });
 
   test("rotates the robot left", () => {
     const moveAroundBoardMock = jest.fn();
-    (createRobot as jest.Mock).mockReturnValue({
-      currentLocation: jest.fn(() => "0 0 W"),
-      moveAroundBoard: moveAroundBoardMock,
-    });
+    setupRobotMock("0 0 W", moveAroundBoardMock);
 
     render(<Board />);
 
-    const rotateLeftButton = screen.getByText("Turn Left");
-
-    fireEvent.click(rotateLeftButton);
+    fireEvent.click(screen.getByText("Turn Left"));
     expect(moveAroundBoardMock).toHaveBeenCalledWith("L");
-
-    const updatedPosition = screen.getByText("Current Position: 0 0 W");
-    expect(updatedPosition).toBeInTheDocument();
+    expect(screen.getByText("Current Position: 0 0 W")).toBeInTheDocument();
   });
 
   test("rotates the robot right", () => {
     const moveAroundBoardMock = jest.fn();
-    (createRobot as jest.Mock).mockReturnValue({
-      currentLocation: jest.fn(() => "0 0 E"),
-      moveAroundBoard: moveAroundBoardMock,
-    });
+    setupRobotMock("0 0 E", moveAroundBoardMock);
 
     render(<Board />);
 
-    const rotateRightButton = screen.getByText("Turn Right");
-
-    fireEvent.click(rotateRightButton);
+    fireEvent.click(screen.getByText("Turn Right"));
     expect(moveAroundBoardMock).toHaveBeenCalledWith("R");
-
-    const updatedPosition = screen.getByText("Current Position: 0 0 E");
-    expect(updatedPosition).toBeInTheDocument();
+    expect(screen.getByText("Current Position: 0 0 E")).toBeInTheDocument();
   });
 
   test("handles robot going out of bounds and plays audio", () => {
-    // Mock the createRobot function to return the lost state
-    (createRobot as jest.Mock).mockReturnValue({
-      currentLocation: jest.fn(() => "0 7 N LOST"),
-      moveAroundBoard: jest.fn(),
-    });
+    setupRobotMock("0 7 N LOST");
 
     render(<Board />);
 
-    const lostPosition = screen.getByText("Current Position: 0 7 N LOST");
-    expect(lostPosition).toBeInTheDocument();
-
-    // Verify if the audio is played
+    expect(
+      screen.getByText("Current Position: 0 7 N LOST")
+    ).toBeInTheDocument();
     expect(global.HTMLAudioElement.prototype.play).toHaveBeenCalledWith();
-
-    // Check if the robot is hidden
-    const robotCell = screen.queryByTestId("robot-cell");
-    expect(robotCell).toBeNull();
+    expect(screen.queryByTestId("robot-cell")).toBeNull();
   });
 });

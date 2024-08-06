@@ -1,20 +1,21 @@
 import { orientationToDegrees, degreesToOrientation } from "../helper";
+import { Orientation } from "../robot.types";
 
 describe("orientationToDegrees", () => {
   it('should return 0 for orientation "N"', () => {
-    expect(orientationToDegrees("N")).toBe(0);
+    expect(orientationToDegrees(Orientation.N)).toBe(0);
   });
 
   it('should return 90 for orientation "E"', () => {
-    expect(orientationToDegrees("E")).toBe(90);
+    expect(orientationToDegrees(Orientation.E)).toBe(90);
   });
 
   it('should return 180 for orientation "S"', () => {
-    expect(orientationToDegrees("S")).toBe(180);
+    expect(orientationToDegrees(Orientation.S)).toBe(180);
   });
 
   it('should return 270 for orientation "W"', () => {
-    expect(orientationToDegrees("W")).toBe(270);
+    expect(orientationToDegrees(Orientation.W)).toBe(270);
   });
 
   it("should throw an error for invalid orientation", () => {

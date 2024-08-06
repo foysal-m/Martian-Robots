@@ -1,15 +1,22 @@
 import { degreesToOrientation, orientationToDegrees } from "./helper";
-import { Board, LostScents } from "./robot.types";
-// Constants
-const rotateLeft: number = -90;
-const rotateRight: number = 90;
+import { Board, LostScents, Orientation } from "./robot.types";
 
-// function to create robot
+// Constants
+const ROTATE_LEFT = -90;
+const ROTATE_RIGHT = 90;
+const FULL_ROTATION = 360;
+
+// Helper function to normalize rotation
+const normalizeRotation = (rotation: number): number => {
+  return (rotation + FULL_ROTATION) % FULL_ROTATION;
+};
+
+// Function to create robot
 export const createRobot = (
   board: Board,
-  x: number = 0,
-  y: number = 0,
-  orientation: "N" | "E" | "S" | "W" = "N"
+  x = 0,
+  y = 0,
+  orientation: Orientation = Orientation.N
 ) => {
   let currentX = x;
   let currentY = y;
@@ -25,35 +32,26 @@ export const createRobot = (
   const moveAroundBoard = (movements: string): string => {
     movements.split("").every((move) => {
       if (isLost) return false; // Stop processing if lost
+
       let newX = currentX;
       let newY = currentY;
+
       switch (move.toUpperCase()) {
         case "L":
-          currentRotate += rotateLeft;
+          currentRotate += ROTATE_LEFT;
           break;
         case "R":
-          currentRotate += rotateRight;
+          currentRotate += ROTATE_RIGHT;
           break;
         case "F":
-          switch (currentRotate % 360) {
-            case 0:
-              newY += 1;
-              break;
-            case 90:
-              newX += 1;
-              break;
-            case 180:
-              newY -= 1;
-              break;
-            case 270:
-              newX -= 1;
-              break;
-          }
+          ({ newX, newY } = getNewCoordinates(newX, newY, currentRotate));
           break;
       }
 
-      if (newX < 0 || newX >= board.width || newY < 0 || newY >= board.height) {
-        if (lostScents[`${currentX},${currentY}`] === undefined) {
+      currentRotate = normalizeRotation(currentRotate);
+
+      if (isOutOfBounds(newX, newY, board)) {
+        if (!lostScents[`${currentX},${currentY}`]) {
           isLost = true;
           return false;
         }
@@ -61,16 +59,29 @@ export const createRobot = (
         moveToSquare(newX, newY);
       }
 
-      if (currentRotate >= 360) {
-        currentRotate -= 360;
-      } else if (currentRotate < 0) {
-        currentRotate += 360;
-      }
-
       return true;
     });
 
     return currentLocation();
+  };
+
+  const getNewCoordinates = (x: number, y: number, rotation: number) => {
+    switch (rotation) {
+      case 0:
+        return { newX: x, newY: y + 1 };
+      case 90:
+        return { newX: x + 1, newY: y };
+      case 180:
+        return { newX: x, newY: y - 1 };
+      case 270:
+        return { newX: x - 1, newY: y };
+      default:
+        return { newX: x, newY: y };
+    }
+  };
+
+  const isOutOfBounds = (x: number, y: number, board: Board) => {
+    return x < 0 || x >= board.width || y < 0 || y >= board.height;
   };
 
   const currentLocation = (): string => {

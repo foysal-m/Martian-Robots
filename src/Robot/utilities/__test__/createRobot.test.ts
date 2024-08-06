@@ -1,4 +1,4 @@
-import { Board } from "../robot.types";
+import { Board, Orientation } from "../robot.types";
 import { createRobot } from "../createRobot";
 
 const mockBoard: Board = {
@@ -10,7 +10,7 @@ describe("Robot", () => {
   let robot: ReturnType<typeof createRobot>;
 
   beforeEach(() => {
-    robot = createRobot(mockBoard, 0, 0, "N");
+    robot = createRobot(mockBoard, 0, 0, Orientation.N);
   });
 
   test("initial position and orientation", () => {
@@ -59,7 +59,7 @@ describe("Robot", () => {
       height: 3,
     };
 
-    const robot = createRobot(mockBoardData, 1, 1, "E");
+    const robot = createRobot(mockBoardData, 1, 1, Orientation.E);
 
     // Perform the movements
     robot.moveAroundBoard("RFRFRFRF");
@@ -70,7 +70,7 @@ describe("Robot", () => {
 
   test("invalid orientation", () => {
     expect(() => {
-      createRobot(mockBoard, 0, 0, "X" as "N" | "E" | "S" | "W");
+      createRobot(mockBoard, 0, 0, "X" as Orientation);
     }).toThrow("Invalid Orientation X");
   });
 });

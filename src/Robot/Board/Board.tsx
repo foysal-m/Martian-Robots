@@ -4,6 +4,7 @@ import { createRobot } from "../utilities/createRobot";
 import Texts from "../../locales/robot.json";
 
 import styles from "./Board.module.scss";
+import { Orientation } from "../utilities/robot.types";
 
 // Define the board dimensions
 const boardWidth = 14; // Upper-right x-coordinate
@@ -11,8 +12,8 @@ const boardHeight = 7; // Upper-right y-coordinate
 
 export const Board = () => {
   // Initialize the robot at the bottom-left corner (0, 0)
-  const [robot, setRobot] = useState(() =>
-    createRobot({ width: boardWidth, height: boardHeight }, 0, 0, "N")
+  const [robot] = useState(() =>
+    createRobot({ width: boardWidth, height: boardHeight }, 0, 0, Orientation.N)
   );
 
   const [robotPosition, setRobotPosition] = useState(robot.currentLocation());
@@ -28,25 +29,20 @@ export const Board = () => {
   };
 
   useEffect(() => {
-    // Play sound if robot position includes "LOST"
     if (isRobotLost) {
       const audio = new Audio(require("../../scream.mp3"));
-      if (audio) {
-        audio.play();
-      }
+      audio.play();
     }
-  }, [robotPosition, isRobotLost]);
+  }, [isRobotLost]);
 
   return (
     <div className={styles.container}>
       <h1>{t(Texts.title)}</h1>
       <div className={styles.board}>
         {cells.map((_, index) => {
-          // Calculate the column and row for the current cell
           const x = index % boardWidth;
           const y = Math.floor(index / boardWidth);
 
-          // Determine if this cell contains the robot
           const robotCell =
             robotPosition.startsWith(`${x} ${boardHeight - 1 - y}`) &&
             !isRobotLost;
@@ -69,10 +65,18 @@ export const Board = () => {
         >
           {t(Texts.moveForward)}
         </button>
-        <button onClick={() => moveRobot("L")} disabled={isRobotLost}>
+        <button
+          onClick={() => moveRobot("L")}
+          disabled={isRobotLost}
+          data-cy="turn-left"
+        >
           {t(Texts.turnLeft)}
         </button>
-        <button onClick={() => moveRobot("R")} disabled={isRobotLost}>
+        <button
+          onClick={() => moveRobot("R")}
+          disabled={isRobotLost}
+          data-cy="turn-right"
+        >
           {t(Texts.turnRight)}
         </button>
       </div>

@@ -1,6 +1,6 @@
-export const orientationToDegrees = (
-  orientation: "N" | "E" | "S" | "W"
-): number => {
+import { Orientation } from "./robot.types";
+
+export const orientationToDegrees = (orientation: Orientation): number => {
   switch (orientation) {
     case "N":
       return 0;
@@ -17,7 +17,7 @@ export const orientationToDegrees = (
 
 export const degreesToOrientation = (
   degrees: number
-): "N" | "E" | "S" | "W" => {
+): keyof typeof Orientation => {
   switch (degrees % 360) {
     case 0:
       return "N";
