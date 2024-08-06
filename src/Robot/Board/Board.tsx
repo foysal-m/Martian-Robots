@@ -62,7 +62,11 @@ export const Board = () => {
         })}
       </div>
       <div className={styles.buttons}>
-        <button onClick={() => moveRobot("F")} disabled={isRobotLost}>
+        <button
+          onClick={() => moveRobot("F")}
+          disabled={isRobotLost}
+          data-cy="move-forward"
+        >
           {t(Texts.moveForward)}
         </button>
         <button onClick={() => moveRobot("L")} disabled={isRobotLost}>

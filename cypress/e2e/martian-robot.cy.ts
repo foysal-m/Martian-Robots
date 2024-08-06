@@ -17,6 +17,29 @@ describe("Board Component", () => {
       .and("contain", "Current Position: 0 0 N");
   });
 
+  it("shows the exact current position of the robot after few random moves", () => {
+    cy.get("button").contains("Turn Right").click();
+
+    const numberOfMoves = 3;
+
+    // Perform the moves
+    for (let i = 0; i < numberOfMoves; i++) {
+      cy.get("button").contains("Move Forward").click();
+      cy.wait(1000);
+    }
+
+    cy.get("button").contains("Turn Left").click();
+
+    for (let i = 0; i < numberOfMoves; i++) {
+      cy.get("button").contains("Move Forward").click();
+      cy.wait(1000);
+    }
+
+    cy.get('[data-cy="current-position"]')
+      .should("be.visible")
+      .and("contain", "Current Position: 3 3 N");
+  });
+
   it("moves the robot forward", () => {
     // Click the "Move Forward" button and verify the new position
     cy.get("button").contains("Move Forward").click();
@@ -74,5 +97,27 @@ describe("Board Component", () => {
       "contain",
       "Current Position: 0 0 W LOST"
     );
+  });
+
+  it("changes the button color on hover", () => {
+    const expectedHoverColor = "rgb(20, 19, 19)";
+
+    // Get all buttons and check hover color
+    cy.get("button").each((eachButton: keyof HTMLElementTagNameMap) => {
+      cy.get(eachButton)
+        .wait(2000)
+        // @ts-expect-error
+        .realHover()
+        .should("have.css", "background-color", expectedHoverColor);
+    });
+  });
+
+  it("shows the correct background color on hover", () => {
+    const expectedHoverColor = "rgb(20, 19, 19)";
+    cy.get('[data-cy="current-position"]')
+      .wait(2000)
+      // @ts-ignore
+      .realHover()
+      .should("have.css", "background-color", expectedHoverColor);
   });
 });
