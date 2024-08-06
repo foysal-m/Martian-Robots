@@ -14,7 +14,9 @@
     "resolveJsonModule": true,
     "isolatedModules": false,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["jest", "testing-library/jest-dom", "node"]
   },
-  "include": ["src"]
+  "include": ["src", "cypress", "test/unit/jest.setup.ts"],
+  "exclude": ["node_modules"]
 }
