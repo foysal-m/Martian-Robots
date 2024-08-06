@@ -52,7 +52,7 @@ export const Board = () => {
               key={index}
               className={`${styles.boardCell} ${
                 robotCell ? styles.robotCell : ""
-              }`}
+              } ${isRobotLost ? styles.lostRobot : ""}`}
             ></div>
           );
         })}
