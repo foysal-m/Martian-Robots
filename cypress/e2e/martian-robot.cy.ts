@@ -1,7 +1,7 @@
 describe("Board Component", () => {
   const baseUrl = "http://localhost:3000/";
   const waitTime = 1000;
-  const hoverColor = "rgb(20, 19, 19)";
+  const hoverColor = "rgb(255, 255, 255)";
 
   const moveForward = (steps: number) => {
     for (let i = 0; i < steps; i++) {
