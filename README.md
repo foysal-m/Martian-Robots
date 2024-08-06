@@ -21,6 +21,10 @@
 - Once the container is running, open your web browser and go to http://localhost:3000 to view the application.
   This approach allows you to run the app without needing to install npm or run it locally.
 
+### How to run on Cypress headless browser
+
+- Run `npx cypress open`, it will open a headless browser, select any browser of your choice. This command will run the tests defined in `matrian-robot.cy.ts` using in headless mode, and you can observe the results there
+
 ### How to see test coverage:
 
 - Run npm test coverage
@@ -32,15 +36,12 @@
 - `Docker`: Utilized for containerizing the application to ensure consistent and portable deployment across different environments. Docker simplifies the process of managing dependencies and configurations, enabling seamless deployment and scaling of the app
 - `TypeScript`: Provides strict type checking to enhance code quality and maintainability
 - `React`: Facilitates the creation of the board and streamlines app development with its component-based architecture
+- `Cypress`: To visually verify the robot's behavior in the browser
 - `Jest & React Testing Library`: Used for unit testing to ensure component functionality and reliability
 - `SCSS`: Utilized for styling the board, offering advanced features and a more maintainable CSS structure
 - `i18next`: For localizing content
 
 ### Next steps
-
-#### Implement End-to-End (E2E) Tests:
-
-- Set up E2E tests using Cypress to visually verify the robot's behavior in the browser, providing a more intuitive testing experience compared to manual testing or unit tests.
 
 #### Enhance the User Interface:
 

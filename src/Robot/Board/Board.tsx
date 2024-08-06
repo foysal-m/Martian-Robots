@@ -72,7 +72,7 @@ export const Board = () => {
           {t(Texts.turnRight)}
         </button>
       </div>
-      <div className={styles.currentPosition}>
+      <div className={styles.currentPosition} data-cy="current-position">
         Current Position: {robotPosition}
       </div>
       {isRobotLost && (
